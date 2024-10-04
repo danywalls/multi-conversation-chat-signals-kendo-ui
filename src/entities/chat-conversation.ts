@@ -7,7 +7,7 @@ export type ChatConversation = {
   messages: Array<Message>;
 };
 
-export const mockConversations = [
+export const mockConversations: ChatConversation[] = [
   {
     id: 1,
     name: 'NBA Chat',
