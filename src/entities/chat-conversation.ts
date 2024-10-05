@@ -3,7 +3,7 @@ import { Message, User } from '@progress/kendo-angular-conversational-ui';
 export type ChatConversation = {
   id: string;
   name: string;
-  pinned: boolean;
+  fav: boolean;
   active: boolean;
   messages: Array<Message>;
 };
@@ -17,7 +17,7 @@ export const mockConversations: ChatConversation[] = [
   {
     id: crypto.randomUUID(),
     name: 'NBA Chat',
-    pinned: true,
+    fav: true,
     active: true,
     messages: [
       {
@@ -29,7 +29,7 @@ export const mockConversations: ChatConversation[] = [
   {
     id: crypto.randomUUID(),
     name: 'Kendo UI Chat',
-    pinned: false,
+    fav: false,
     active: false,
     messages: [{ text: 'Want to learn Kendo UI?', author: AIBot }],
   },
@@ -40,7 +40,7 @@ export const initialConversation: ChatConversation = {
   name: 'Initial conversation',
   messages: [],
   active: false,
-  pinned: false,
+  fav: false,
 };
 
 export const firstAIInteraction: Omit<ChatConversation, 'name'> = {
@@ -52,7 +52,7 @@ export const firstAIInteraction: Omit<ChatConversation, 'name'> = {
       text: 'Welcome to Kendo AI',
     },
   ],
-  pinned: false,
+  fav: false,
 };
 
 export const defaultUser: User = {

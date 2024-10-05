@@ -77,7 +77,7 @@ export class ConversationsListComponent {
   }
 
   onTogglePin(dataItem: ChatConversation) {
-    dataItem.pinned = !dataItem.pinned;
+    dataItem.fav = !dataItem.fav;
     this.conversations.update((currentItems) =>
       currentItems.map((p) => (p.id === dataItem.id ? dataItem : p)),
     );
