@@ -6,14 +6,15 @@
   (remove)="removeHandler($event)"
 >
   <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
-    <div class="chat-item">
-      
-      @if (dataItem.pinned) {
+    <div class="k-d-flex k-justify-content-around k-cursor-pointer">
+
+      @if (dataItem.fav) {
         <span class="pinned-label">❤️</span>
       }
       <p (click)="onConversationSelect(dataItem)">{{ dataItem.name }} </p>
       <div class="chat-actions">
-        <button (click)="onTogglePin(dataItem)" class="fas fa-thumbtack">Pin</button>
+        <kendo-icon name="paperclip"></kendo-icon>
+        <button kendoButton (click)="onTogglePin(dataItem)">Pin</button>
         <button kendoListViewEditCommand class="fas fa-edit">Edit</button>
         <button kendoListViewRemoveCommand class="fas fa-trash-alt">Remove</button>
       </div>

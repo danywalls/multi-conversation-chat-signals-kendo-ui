@@ -1,5 +1,8 @@
-import { Component, model, output } from '@angular/core';
-import { ChatConversation } from '../../../entities/chat-conversation';
+import { Component, model } from '@angular/core';
+import {
+  ChatConversation,
+  initialConversation,
+} from '../../../entities/chat-entities';
 import {
   CancelEvent,
   EditCommandDirective,
@@ -11,28 +14,27 @@ import {
   SaveEvent,
 } from '@progress/kendo-angular-listview';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { ButtonComponent } from '@progress/kendo-angular-buttons';
+import { KENDO_ICONS } from '@progress/kendo-angular-icons';
 
 @Component({
-  selector: 'app-conversations-list',
-  standalone: true,
   imports: [
     ListViewComponent,
     ItemTemplateDirective,
     EditCommandDirective,
     KENDO_LISTVIEW,
-
+    KENDO_ICONS,
     FormsModule,
-    JsonPipe,
+    ButtonComponent,
   ],
-  templateUrl: './conversations-list.component.html',
+  selector: 'app-conversations-list',
+  standalone: true,
   styleUrl: './conversations-list.component.css',
+  templateUrl: './conversations-list.component.html',
 })
 export class ConversationsListComponent {
   conversations = model.required<ChatConversation[]>();
   conversationSelected = model.required<ChatConversation>();
-  conversationUpdated = output<ChatConversation>();
-  conversationDeleted = output<number>();
 
   public editedConversation: ChatConversation | null = null;
   public editedIndex: number | null = null;
@@ -51,13 +53,16 @@ export class ConversationsListComponent {
   }
 
   saveHandler({ sender, itemIndex, dataItem }: SaveEvent) {
-    console.log(dataItem);
     sender.closeItem(itemIndex);
-    this.editedConversation = null;
-    this.editedIndex = null;
+    this.resetEdit();
     this.conversations.update((currentItems) =>
       currentItems.map((p) => (p.id === dataItem.id ? dataItem : p)),
     );
+  }
+
+  private resetEdit() {
+    this.editedConversation = null;
+    this.editedIndex = null;
   }
 
   removeHandler({ dataItem }: RemoveEvent) {
@@ -66,14 +71,13 @@ export class ConversationsListComponent {
     );
     if (dataItem.id === this.conversationSelected().id) {
       dataItem.active = false;
-      this.conversationSelected.set(dataItem);
+      this.conversationSelected.set(initialConversation);
     }
   }
 
   private closeEditor(sender: any, itemIndex = this.editedIndex) {
     sender.closeItem(itemIndex);
-    this.editedConversation = null;
-    this.editedIndex = null;
+    this.resetEdit();
   }
 
   onTogglePin(dataItem: ChatConversation) {
@@ -85,7 +89,6 @@ export class ConversationsListComponent {
 
   onConversationSelect(dataItem: ChatConversation) {
     dataItem.active = true;
-
     this.conversationSelected.set(dataItem);
   }
 }

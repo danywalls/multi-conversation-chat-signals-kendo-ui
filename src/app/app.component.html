@@ -1,18 +1,17 @@
-<div class="main-layout k-d-flex">
-  <aside>
-    <aside>
-      <button (click)="createNewConversation()" class="new-conversation-btn">
-        New Conversation
-      </button>
-      <app-conversations-list
-        [(conversationSelected)]="currentConversation"
-        [(conversations)]="conversations"
-      ></app-conversations-list>
-    </aside>
+<div class="k-d-flex">
+  <aside class="k-w-2/6">
+    <button kendoButton (click)="createNewConversation()" class="new-conversation-btn">
+      New Conversation
+    </button>
+    <app-conversations-list
+      [(conversationSelected)]="currentConversation"
+      [(conversations)]="conversations"
+    ></app-conversations-list>
   </aside>
+
   @if (currentConversation().active) {
     <div class="k-flex-1">
-      <h2>{{ currentConversation().name }}</h2>
+      <h2 class="k-text-center">{{ currentConversation().name }}</h2>
       <kendo-chat
         [user]="defaultUser"
         [messages]="currentConversation().messages"
@@ -27,8 +26,6 @@
         </ng-template>
       </kendo-chat>
     </div>
-  } @else {
-    Create a new conversation
-    <button (click)="createNewConversation()">Create</button>
   }
+
 </div>
