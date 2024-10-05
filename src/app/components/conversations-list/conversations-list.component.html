@@ -1,0 +1,30 @@
+<kendo-listview
+  [data]="conversations()"
+  (edit)="editHandler($event)"
+  (cancel)="cancelHandler($event)"
+  (save)="saveHandler($event)"
+  (remove)="removeHandler($event)"
+>
+  <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+    <div class="chat-item">
+      @if (dataItem.pinned) {
+        <span class="pinned-label">❤️</span>
+      }
+      <p (click)="onConversationSelect(dataItem)">{{ dataItem.name }} </p>
+      <div class="chat-actions">
+        <button (click)="onTogglePin(dataItem)" class="fas fa-thumbtack">Pin</button>
+        <button kendoListViewEditCommand class="fas fa-edit">Edit</button>
+        <button kendoListViewRemoveCommand class="fas fa-trash-alt">Remove</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template kendoListViewEditTemplate let-dataItem="dataItem">
+    <input [(ngModel)]="dataItem.name" name="name" class="k-textbox" required/>
+    <div class="edit-buttons">
+      <button kendoListViewSaveCommand>Save</button>
+      <button kendoListViewCancelCommand>Cancel</button>
+    </div>
+  </ng-template>
+</kendo-listview>
+
