@@ -15,7 +15,6 @@ import {
 } from '@progress/kendo-angular-listview';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@progress/kendo-angular-buttons';
-import { KENDO_ICONS } from '@progress/kendo-angular-icons';
 
 @Component({
   imports: [
@@ -23,7 +22,6 @@ import { KENDO_ICONS } from '@progress/kendo-angular-icons';
     ItemTemplateDirective,
     EditCommandDirective,
     KENDO_LISTVIEW,
-    KENDO_ICONS,
     FormsModule,
     ButtonComponent,
   ],
