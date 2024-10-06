@@ -50,7 +50,7 @@ export class AppComponent {
     this.conversations.update((conversations) =>
       conversations.filter((p) => p.id !== id),
     );
-    console.log(this.conversations());
+
     if (id === this.currentConversation().id) {
       this.currentConversation.set(initialConversation);
     }

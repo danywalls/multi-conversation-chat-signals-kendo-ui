@@ -32,6 +32,7 @@ export class ConversationsListComponent {
   conversationSelected = model.required<ChatConversation>();
   conversationUpdated = output<ChatConversation>();
   conversationDeleted = output<string>();
+
   public editedConversation: ChatConversation | null = null;
   public editedIndex: number | null = null;
 
@@ -48,19 +49,9 @@ export class ConversationsListComponent {
     this.closeEditor(sender, itemIndex);
   }
 
-  saveHandler({ sender, itemIndex, dataItem }: SaveEvent) {
-    sender.closeItem(itemIndex);
-    this.resetEdit();
-    this.conversationUpdated.emit(dataItem);
-  }
-
   private resetEdit() {
     this.editedConversation = null;
     this.editedIndex = null;
-  }
-
-  removeHandler({ dataItem }: RemoveEvent) {
-    this.conversationDeleted.emit(dataItem.id);
   }
 
   private closeEditor(sender: any, itemIndex = this.editedIndex) {
@@ -68,9 +59,19 @@ export class ConversationsListComponent {
     this.resetEdit();
   }
 
+  saveHandler({ sender, itemIndex, dataItem }: SaveEvent) {
+    sender.closeItem(itemIndex);
+    this.resetEdit();
+    this.conversationUpdated.emit(dataItem);
+  }
+
   onTogglePin(dataItem: ChatConversation) {
     dataItem.fav = !dataItem.fav;
     this.conversationUpdated.emit(dataItem);
+  }
+
+  removeHandler({ dataItem }: RemoveEvent) {
+    this.conversationDeleted.emit(dataItem.id);
   }
 
   onConversationSelect(dataItem: ChatConversation) {
