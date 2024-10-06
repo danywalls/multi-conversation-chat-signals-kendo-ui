@@ -40,16 +40,30 @@ export class AppComponent {
     this.currentConversation.set(newConversation);
   }
 
+  updateConversation(conversation: ChatConversation) {
+    this.conversations.update((currentItems) =>
+      currentItems.map((p) => (p.id === conversation.id ? conversation : p)),
+    );
+  }
+
+  deleteConversation(id: string) {
+    console.log('deleting');
+    console.log(id);
+    this.conversations.update((conversations) =>
+      conversations.filter((p) => p.id !== id),
+    );
+    console.log(this.conversations());
+    if (id === this.currentConversation().id) {
+      this.currentConversation.set(initialConversation);
+    }
+  }
+
   updateMessage($event: SendMessageEvent) {
     this.currentConversation.update((c) => ({
       ...c,
       messages: [...c.messages, $event.message],
     }));
 
-    this.conversations.update((currentItems) =>
-      currentItems.map((p) =>
-        p.id === this.currentConversation().id ? this.currentConversation() : p,
-      ),
-    );
+    this.updateConversation(this.currentConversation());
   }
 }

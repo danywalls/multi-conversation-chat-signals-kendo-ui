@@ -1,8 +1,5 @@
-import { Component, model } from '@angular/core';
-import {
-  ChatConversation,
-  initialConversation,
-} from '../../../entities/chat-entities';
+import { Component, model, output } from '@angular/core';
+import { ChatConversation } from '../../../entities/chat-entities';
 import {
   CancelEvent,
   EditCommandDirective,
@@ -33,7 +30,8 @@ import { ButtonComponent } from '@progress/kendo-angular-buttons';
 export class ConversationsListComponent {
   conversations = model.required<ChatConversation[]>();
   conversationSelected = model.required<ChatConversation>();
-
+  conversationUpdated = output<ChatConversation>();
+  conversationDeleted = output<string>();
   public editedConversation: ChatConversation | null = null;
   public editedIndex: number | null = null;
 
@@ -53,9 +51,7 @@ export class ConversationsListComponent {
   saveHandler({ sender, itemIndex, dataItem }: SaveEvent) {
     sender.closeItem(itemIndex);
     this.resetEdit();
-    this.conversations.update((currentItems) =>
-      currentItems.map((p) => (p.id === dataItem.id ? dataItem : p)),
-    );
+    this.conversationUpdated.emit(dataItem);
   }
 
   private resetEdit() {
@@ -64,13 +60,7 @@ export class ConversationsListComponent {
   }
 
   removeHandler({ dataItem }: RemoveEvent) {
-    this.conversations.update((conversations) =>
-      conversations.filter((p) => p.id !== dataItem.id),
-    );
-    if (dataItem.id === this.conversationSelected().id) {
-      dataItem.active = false;
-      this.conversationSelected.set(initialConversation);
-    }
+    this.conversationDeleted.emit(dataItem);
   }
 
   private closeEditor(sender: any, itemIndex = this.editedIndex) {
@@ -80,9 +70,7 @@ export class ConversationsListComponent {
 
   onTogglePin(dataItem: ChatConversation) {
     dataItem.fav = !dataItem.fav;
-    this.conversations.update((currentItems) =>
-      currentItems.map((p) => (p.id === dataItem.id ? dataItem : p)),
-    );
+    this.conversationUpdated.emit(dataItem);
   }
 
   onConversationSelect(dataItem: ChatConversation) {

@@ -1,12 +1,12 @@
 import { Message, User } from '@progress/kendo-angular-conversational-ui';
 
-export type ChatConversation = {
+export interface ChatConversation {
   id: string;
   name: string;
   fav: boolean;
   active: boolean;
-  messages: Array<Message>;
-};
+  messages: Message[];
+}
 
 export const defaultUser: User = {
   id: crypto.randomUUID(),

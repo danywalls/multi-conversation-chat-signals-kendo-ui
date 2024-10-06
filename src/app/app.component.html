@@ -4,6 +4,8 @@
       New Conversation
     </button>
     <app-conversations-list
+      (conversationUpdated)="updateConversation($event)"
+      (conversationDeleted)="deleteConversation($event)"
       [(conversationSelected)]="currentConversation"
       [(conversations)]="conversations"
     ></app-conversations-list>
