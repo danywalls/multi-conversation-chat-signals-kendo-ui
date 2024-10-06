@@ -60,7 +60,7 @@ export class ConversationsListComponent {
   }
 
   removeHandler({ dataItem }: RemoveEvent) {
-    this.conversationDeleted.emit(dataItem);
+    this.conversationDeleted.emit(dataItem.id);
   }
 
   private closeEditor(sender: any, itemIndex = this.editedIndex) {

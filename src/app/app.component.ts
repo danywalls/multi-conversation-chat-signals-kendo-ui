@@ -47,8 +47,6 @@ export class AppComponent {
   }
 
   deleteConversation(id: string) {
-    console.log('deleting');
-    console.log(id);
     this.conversations.update((conversations) =>
       conversations.filter((p) => p.id !== id),
     );
