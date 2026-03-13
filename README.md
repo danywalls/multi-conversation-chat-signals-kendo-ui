@@ -14,6 +14,17 @@ A chat application supporting multiple conversations with editing, deleting, and
 1. `ng serve` 
 2. Interact with different chat threads powered by Signals.
 
+## Project Summary
+A chat application supporting multiple conversations with editing, deleting, and favoriting, built using Kendo UI and Angular Signals.
+
+## How to Run
+### Installation
+1. `npm install` 
+
+### Running
+1. `ng serve` 
+2. Interact with different chat threads powered by Signals.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
 
 ## Development server
