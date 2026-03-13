@@ -1,4 +1,18 @@
-# ConversationChat
+> [!NOTE]
+> This repository contains the source code for the article: **[Multi-Conversation Chat with Kendo UI and Signals](https://www.telerik.com/blogs/build-multi-conversation-chat-kendo-ui-signals)** originally published on [Telerik Blogs](https://www.telerik.com/blogs).
+
+# Multi-Conversation Chat with Kendo UI and Signals
+
+## Project Summary
+A chat application supporting multiple conversations with editing, deleting, and favoriting, built using Kendo UI and Angular Signals.
+
+## How to Run
+### Installation
+1. `npm install` 
+
+### Running
+1. `ng serve` 
+2. Interact with different chat threads powered by Signals.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
 
@@ -25,3 +39,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+---
+Stay connected: [@danywalls](https://twitter.com/danywalls)
